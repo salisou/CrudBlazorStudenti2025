@@ -1,5 +1,7 @@
 using BlazorApp1.Components;
 using BlazorApp1.Data;
+using BlazorApp1.Services.Interfaces;
+using BlazorApp1.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,8 @@ var conn = builder.Configuration.GetConnectionString("strConnection")
 
 builder.Services.AddDbContext<WebAppContext>(options =>
     options.UseSqlServer(conn));
+
+builder.Services.AddScoped<IStudentiService, StudentiService>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,5 +1,7 @@
 ﻿@page "/studenti"
-@using BlazorApp1.Models
+
+@inject NavigationManager NavigationManager
+@inject StudentiService StudentiService
 
 <h3>Studenti</h3>
 
@@ -24,41 +26,20 @@
                 <td>@s.Cognome</td>
                 <td>@s.Eta</td>
                 <td>
-                    <button class="btn btn-primary btn-sm" @onclick="() => ModificaStudente(s.Id)">Modifica</button>
-                    <button class="btn btn-danger btn-sm" @onclick="() => EliminaStudente(s.Id)">Elimina</button>
+                    <button class="btn btn-primary btn-sm">Modifica</button>
+                    <button class="btn btn-danger btn-sm">Elimina</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
+
 @code {
-    // Popolamento della tabella studenti
     private List<Studente> studenti = new();
 
-    private Studente? studenteCorrente;
-
-    private void AggiungiStudente()
+    protected override async Task OnInitializedAsync()
     {
-        studenteCorrente = new Studente(); // Mostra il form
-    }
-
-
-    private void ModificaStudente(int id)
-    {
-        studenteCorrente = studenti.FirstOrDefault(s => s.Id == id);
-    }
-
-    private void SalvaStudente()
-    {
-    }
-
-    private void EliminaStudente(int id)
-    {
-        Studente? value = studenti.FirstOrDefault(s => s.Id == id);
-        if (value != null)
-        {
-            studenti.Remove(value);
-        }
+        studenti = await StudentiService.GetAllStudentiAsync();
     }
 }
