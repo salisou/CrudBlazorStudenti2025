@@ -1,0 +1,76 @@
+﻿
+1 - dotnet clean
+2 - dotnet restore
+3 - dotnet build
+
+4 - Modifica il file appsettings.json per aggiungere la stringa di connessione al database:
+{
+  "ConnectionStrings": {
+	"DefaultConnection": ---Incollare qui la stringa di connessione al database---
+  },
+  ...
+}
+
+5 - Aggiornare la classe che si trova nel BlazorApp1.Data e modifica:
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+
+namespace BlazorApp1.Data
+{
+    public class WebAppDbContextFactory : IDesignTimeDbContextFactory<WebAppContext>
+    {
+        public WebAppContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<WebAppContext>();
+
+            optionsBuilder.UseSqlServer(??????????????Giuseppeeeeeeee??????????????);
+
+            return new WebAppContext(optionsBuilder.Options);
+        }
+    }
+}
+
+6 - Fare la build e restore (dotnet restore) e (dotnet build)
+7 - Creare la migrazione:
+   dotnet ef migrations add InitialCreate
+
+
+8 - Aggiornare il database:
+   dotnet ef database update
+
+9 - Popolamento del database 
+use cambiami con il nome del tuo database
+GO
+
+INSERT INTO Studenti (Nome, Cognome, Eta)
+VALUES
+('Marco', 'Rossi', 20),
+('Luca', 'Bianchi', 22),
+('Giulia', 'Verdi', 19),
+('Sara', 'Neri', 21),
+('Andrea', 'Ferrari', 23),
+('Francesca', 'Russo', 20),
+('Davide', 'Esposito', 24),
+('Chiara', 'Romano', 22),
+('Matteo', 'Gallo', 21),
+('Alessia', 'Costa', 19),
+('Simone', 'Conti', 25),
+('Elena', 'DeLuca', 23),
+('Federico', 'Mancini', 20),
+('Martina', 'Colombo', 22),
+('Paolo', 'Greco', 24),
+('Valentina', 'Marino', 21),
+('Stefano', 'Giordano', 26),
+('Laura', 'Rinaldi', 23),
+('Antonio', 'Caruso', 22),
+('Ilaria', 'Vitale', 20),
+('Riccardo', 'Moretti', 24),
+('Silvia', 'Barbieri', 21),
+('Giorgio', 'Fontana', 25),
+('Noemi', 'Santoro', 19),
+('Alberto', 'Pellegrini', 27),
+('Claudia', 'Bernardi', 22),
+('Nicola', 'Fabbri', 23),
+('Beatrice', 'Serra', 20),
+('Emanuele', 'Testa', 24),
+('Roberta', 'Palmieri', 21);
