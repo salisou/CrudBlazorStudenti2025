@@ -1,0 +1,24 @@
+Pacchetti di Entity Framework Core da istallare:
+	dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.22
+	dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.22
+	dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
+	dotnet tool install --global dotnet-ef --version 8.0.*
+
+Per risolvere l'errore del System.Runtime, Version=10.0.0.0
+Crea un di configurazione per forzare l'uso di .Net8Nella root della solution, crea 
+un file chiamato global.json:
+{
+  "sdk": {
+    "version": "8.0.416",
+    "rollForward": "disable"
+  }
+}
+
+
+dotnet clean
+dotnet restore
+dotnet build
+
+dotnet ef migrations add ...    // (dotnet ef migrations remove) per rimuovere la migrazione
+
+dotnet ef database update

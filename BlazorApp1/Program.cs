@@ -1,4 +1,6 @@
 using BlazorApp1.Components;
+using BlazorApp1.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,12 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 var app = builder.Build();
+
+var conn = builder.Configuration.GetConnectionString("strConnection")
+    ?? throw new InvalidOperationException("Connection string 'strConnection' not found.");
+
+builder.Services.AddDbContext<WebAppContext>(options =>
+    options.UseSqlServer(conn));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
