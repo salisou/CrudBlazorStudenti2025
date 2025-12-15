@@ -3,7 +3,7 @@
 
 <h3>Studenti</h3>
 
-<button class="btn btn-primary mb-2" @onclick="AggiungiStudente">Aggiungi Studente</button>
+<a href="/studenti/aggiungi" class="btn btn-primary mb-2">Aggiungi Studente</a>
 
 <table class="table table-light table-bordered">
     <thead>
@@ -31,42 +31,10 @@
         }
     </tbody>
 </table>
-<!--Form Aggiungi-->
-@if (studenteCorrente != null)
-{
-    <div class="card p-3 mb-3">
-        <h5>@(studenteCorrente.Id == 0 ? "Nuovo studente" : "Modifica Studente")</h5>
-
-        <label for="exampleFormControlInput1" class="form-label">Nome</label>
-        <input type="text" class="form-control" placeholder="Nome Studente" @bind="studenteCorrente.Nome"/>
-       
-        <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-        <input type="text" class="form-control" placeholder="Cognome Studente" @bind="studenteCorrente.Cognome"/>
-
-        <label for="exampleFormControlInput1" class="form-label">Eta</label>
-        <input type="number" class="form-control" placeholder="Età Studente" @bind="studenteCorrente.Eta" />
-
-
-        <button class="btn btn-success mt-2">Salva</button>
-        <button class="btn btn-secondary mt-2">Annulla</button>
-    </div>
-}
 
 @code {
     // Popolamento della tabella studenti
-    private List<Studente> studenti = new()
-    {
-        new Studente { Id = 1, Nome = "Mario", Cognome = "Rossi", Eta = 20 },
-        new Studente { Id = 2, Nome = "Giuseppe", Cognome = "Verdi", Eta = 22 },
-        new Studente { Id = 3, Nome = "Rocco", Cognome = "Bianchi", Eta = 19 },
-        new Studente { Id = 4, Nome = "Paolo", Cognome = "Neri", Eta = 21 },
-        new Studente { Id = 5, Nome = "Luca", Cognome = "Gialli", Eta = 23 },
-        new Studente { Id = 6, Nome = "Sara", Cognome = "Blu", Eta = 20 },
-        new Studente { Id = 7, Nome = "Marco", Cognome = "Cogoni", Eta = 22 },
-        new Studente { Id = 8, Nome = "Anna", Cognome = "Esposito", Eta = 19 },
-        new Studente { Id = 9, Nome = "Elena", Cognome = "Russo", Eta = 21 },
-        new Studente { Id = 10, Nome = "Francesca", Cognome = "Ferrari", Eta = 23 }
-    };
+    private List<Studente> studenti = new();
 
     private Studente? studenteCorrente;
 
