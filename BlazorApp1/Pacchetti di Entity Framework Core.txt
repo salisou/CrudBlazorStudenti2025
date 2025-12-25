@@ -2,7 +2,9 @@ Pacchetti di Entity Framework Core da istallare:
 	dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.22
 	dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.22
 	dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
+	dotnet tool uninstall --global dotnet-ef
 	dotnet tool install --global dotnet-ef --version 8.0.*
+
 
 Per risolvere l'errore del System.Runtime, Version=10.0.0.0
 Crea un di configurazione per forzare l'uso di .Net8Nella root della solution, crea 
